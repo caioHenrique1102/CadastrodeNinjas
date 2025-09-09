@@ -1,4 +1,5 @@
-package dev.SpringJava.CadastroDeNinjas;
+package dev.SpringJava.CadastroDeNinjas.Ninjas.Model;
+import dev.SpringJava.CadastroDeNinjas.Missoes.MissoesModel;
 import jakarta.persistence.*;
 
 //Entity tranforma uma classe em uma entidade no banco de dados
@@ -7,17 +8,22 @@ import jakarta.persistence.*;
 public class NinjaModel {
 
     @Id
-    //usado para gerar os valores do ide como serão gerados
+    //usado para gerar os valores do id automaticamente e como serão gerados
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String nome;
     private String email;
     private int idade;
 
+    //@ManyToOne -> Muitos ninjas podem ter apenas uma missão
+    @ManyToOne
+    private MissoesModel missoesModel;
+
     public NinjaModel(String nome, String email, int idade) {
         this.nome = nome;
         this.email = email;
         this.idade = idade;
+
     }
 
     public NinjaModel(){
