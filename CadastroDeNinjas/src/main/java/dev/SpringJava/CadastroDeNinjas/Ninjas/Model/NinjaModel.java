@@ -17,6 +17,7 @@ public class NinjaModel {
 
     //@ManyToOne -> Muitos ninjas podem ter apenas uma missão
     @ManyToOne
+    @JoinColumn(name = "missoes_id") //Chave estrangeira
     private MissoesModel missoesModel;
 
     public NinjaModel(String nome, String email, int idade) {
