@@ -1,4 +1,5 @@
 package dev.SpringJava.CadastroDeNinjas.Entity;
+import dev.SpringJava.CadastroDeNinjas.DTO.NinjaDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +13,14 @@ import lombok.*;
 public class NinjaModel {
 
 
+    public NinjaModel(NinjaDTO ninjaDTO) {
+        Id = ninjaDTO.Id();
+        this.nome = ninjaDTO.nome();
+        this.email = ninjaDTO.email();
+        this.idade = ninjaDTO.idade();
+        this.missoesModel = ninjaDTO.missoesModel();
+    }
+
     @Id
     //usado para gerar os valores do id automaticamente e como serão gerados
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +33,5 @@ public class NinjaModel {
     @ManyToOne
     @JoinColumn(name = "missoes_id") //Chave estrangeira
     private MissoesModel missoesModel;
-
-
-
 
 }

@@ -1,14 +1,8 @@
 package dev.SpringJava.CadastroDeNinjas.DTO;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import dev.SpringJava.CadastroDeNinjas.Entity.MissoesModel;
 
-@Getter
-@Setter
-public class NinjaDTO {
-    private Long Id;
-    private String nome;
-    private String email;
-    private int idade;
+public record NinjaDTO (Long Id, String nome, String email , int idade, MissoesModel missoesModel){
+
 }

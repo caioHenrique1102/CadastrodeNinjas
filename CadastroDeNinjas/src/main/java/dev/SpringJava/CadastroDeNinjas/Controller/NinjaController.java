@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/ninja")
 public class NinjaController {
@@ -19,19 +20,17 @@ public class NinjaController {
         this.ninjaService = ninjaService;
     }
 
-
-
     @PostMapping("/cadastro")
     public ResponseEntity<NinjaModel> cadastro(@RequestBody NinjaDTO ninjaDTO) {
         //vai verificar se as informações do formulario é boa
-        if (ninjaDTO.getNome() == null || ninjaDTO.getNome().isEmpty()) {
+        if (ninjaDTO.nome() == null || ninjaDTO.nome().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
 
         NinjaModel ninja = new NinjaModel();
-        ninja.setNome(ninjaDTO.getNome());
-        ninja.setEmail(ninjaDTO.getEmail());
-        ninja.setIdade(ninjaDTO.getIdade());
+        ninja.setNome(ninjaDTO.nome());
+        ninja.setEmail(ninjaDTO.email());
+        ninja.setIdade(ninjaDTO.idade());
 
         NinjaModel cadastrado = ninjaService.Cadastrar(ninja);
 
@@ -41,7 +40,17 @@ public class NinjaController {
     }
 
     @GetMapping("/buscar/{id}")
-    public Optional<NinjaModel> BuscarNinja(@PathVariable Long id){
-        return ninjaService.BuscarporId(id);
-    }
+    public Optional<NinjaModel> BuscarNinja(@PathVariable Long id){return ninjaService.BuscarporNinja(id);}
+
+    @DeleteMapping("/deletar/{id}")
+    public void Deletar(Long id){ninjaService.Deletar(id);}
+
+    //@PatchMapping("/altera/{id}")
+    //public ResponseEntity<NinjaModel> AlterarNinja(@PathVariable Long id, @RequestBody NinjaDTO ninja){
+      //  Optional <NinjaModel> ninjaAlterado = ninjaService.Alterar(ninja, id);
+      //  return
+    //}
+
+
+
 }
