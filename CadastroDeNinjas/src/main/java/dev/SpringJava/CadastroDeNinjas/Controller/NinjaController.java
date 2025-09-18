@@ -33,10 +33,8 @@ public class NinjaController {
         ninja.setIdade(ninjaDTO.idade());
 
         NinjaModel cadastrado = ninjaService.Cadastrar(ninja);
-
         //Retornar uma mensagem para o front que o cliente foi criado com sucesso
         return ResponseEntity.status(HttpStatus.CREATED).body(cadastrado);
-
     }
 
     @GetMapping("/buscar/{id}")
@@ -45,11 +43,10 @@ public class NinjaController {
     @DeleteMapping("/deletar/{id}")
     public void Deletar(Long id){ninjaService.Deletar(id);}
 
-    //@PatchMapping("/altera/{id}")
-    //public ResponseEntity<NinjaModel> AlterarNinja(@PathVariable Long id, @RequestBody NinjaDTO ninja){
-      //  Optional <NinjaModel> ninjaAlterado = ninjaService.Alterar(ninja, id);
-      //  return
-    //}
+    @PatchMapping("/altera/{id}")
+    public Optional<NinjaModel> AlterarNinja(@PathVariable Long id, @RequestBody NinjaDTO ninja){
+       return ninjaService.Alterar( ninja, id);
+    }
 
 
 
