@@ -1,5 +1,5 @@
 package dev.SpringJava.CadastroDeNinjas.Service;
-
+import dev.SpringJava.CadastroDeNinjas.DTO.MissoesDTO;
 import dev.SpringJava.CadastroDeNinjas.Model.Entity.MissoesModel;
 import dev.SpringJava.CadastroDeNinjas.Model.Repository.MissoesRepository;
 
@@ -13,7 +13,11 @@ public class MissoesService {
         this.missoesRepository = missoesRepository;
     }
 
-    public MissoesModel CadastrarMissoes(MissoesModel missoesModel){
+    public MissoesModel CadastrarMissoes(MissoesDTO missoesDTO){
+        MissoesModel missoesModel = new MissoesModel();
+        missoesModel.setNome(missoesDTO.nome());
+        missoesModel.setDificuldade(missoesDTO.dificuldade());
+
        return missoesRepository.save(missoesModel);
     }
 
