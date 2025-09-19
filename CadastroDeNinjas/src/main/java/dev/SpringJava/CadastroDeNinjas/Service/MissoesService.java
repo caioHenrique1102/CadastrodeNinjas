@@ -1,7 +1,7 @@
 package dev.SpringJava.CadastroDeNinjas.Service;
 
-import dev.SpringJava.CadastroDeNinjas.Entity.MissoesModel;
-import dev.SpringJava.CadastroDeNinjas.Repository.MissoesRepository;
+import dev.SpringJava.CadastroDeNinjas.Model.Entity.MissoesModel;
+import dev.SpringJava.CadastroDeNinjas.Model.Repository.MissoesRepository;
 
 import java.util.List;
 import java.util.Optional;

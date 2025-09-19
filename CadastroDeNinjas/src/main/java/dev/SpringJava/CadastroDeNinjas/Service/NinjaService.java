@@ -1,7 +1,7 @@
 package dev.SpringJava.CadastroDeNinjas.Service;
 import dev.SpringJava.CadastroDeNinjas.DTO.NinjaDTO;
-import dev.SpringJava.CadastroDeNinjas.Entity.NinjaModel;
-import dev.SpringJava.CadastroDeNinjas.Repository.NinjaRepository;
+import dev.SpringJava.CadastroDeNinjas.Model.Entity.NinjaModel;
+import dev.SpringJava.CadastroDeNinjas.Model.Repository.NinjaRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -20,12 +20,19 @@ public class NinjaService {
      }
 
      public Optional <NinjaModel> BuscarporNinja(Long id){
+        if(BuscarporNinja(id).isPresent()){
             return ninjaRepository.findById(id);
+        }else {
+            return Optional.empty();
+        }
     }
 
-     public NinjaModel Cadastrar(NinjaModel ninjaModel){
-
-        return ninjaRepository.save(ninjaModel);
+     public NinjaModel Cadastrar(NinjaDTO ninjaDTO){
+         NinjaModel ninja = new NinjaModel();
+         ninja.setNome(ninjaDTO.nome());
+         ninja.setEmail(ninjaDTO.email());
+         ninja.setIdade(ninjaDTO.idade());
+        return ninjaRepository.save(ninja);
      }
 
      public void Deletar (Long id){

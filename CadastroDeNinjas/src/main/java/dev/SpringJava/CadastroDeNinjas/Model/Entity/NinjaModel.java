@@ -1,4 +1,4 @@
-package dev.SpringJava.CadastroDeNinjas.Entity;
+package dev.SpringJava.CadastroDeNinjas.Model.Entity;
 import dev.SpringJava.CadastroDeNinjas.DTO.NinjaDTO;
 import jakarta.persistence.*;
 import lombok.*;

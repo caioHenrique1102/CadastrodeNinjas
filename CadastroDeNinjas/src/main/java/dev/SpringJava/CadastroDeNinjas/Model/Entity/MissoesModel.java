@@ -1,4 +1,4 @@
-package dev.SpringJava.CadastroDeNinjas.Entity;
+package dev.SpringJava.CadastroDeNinjas.Model.Entity;
 
 import dev.SpringJava.CadastroDeNinjas.DTO.MissoesDTO;
 import jakarta.persistence.*;
@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

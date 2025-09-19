@@ -1,6 +1,6 @@
-package dev.SpringJava.CadastroDeNinjas.Repository;
+package dev.SpringJava.CadastroDeNinjas.Model.Repository;
 
-import dev.SpringJava.CadastroDeNinjas.Entity.MissoesModel;
+import dev.SpringJava.CadastroDeNinjas.Model.Entity.MissoesModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
