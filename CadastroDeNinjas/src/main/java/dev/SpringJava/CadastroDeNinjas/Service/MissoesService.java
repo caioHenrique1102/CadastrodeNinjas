@@ -1,16 +1,38 @@
 package dev.SpringJava.CadastroDeNinjas.Service;
 import dev.SpringJava.CadastroDeNinjas.DTO.MissoesDTO;
 import dev.SpringJava.CadastroDeNinjas.Model.Entity.MissoesModel;
+import dev.SpringJava.CadastroDeNinjas.Model.Entity.NinjaModel;
 import dev.SpringJava.CadastroDeNinjas.Model.Repository.MissoesRepository;
+import dev.SpringJava.CadastroDeNinjas.Model.Repository.NinjaRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class MissoesService {
    private final MissoesRepository missoesRepository;
+   private final NinjaRepository ninjaRepository;
 
-    public MissoesService(MissoesRepository missoesRepository) {
+    public MissoesService(MissoesRepository missoesRepository, NinjaRepository ninjaRepository) {
         this.missoesRepository = missoesRepository;
+        this.ninjaRepository = ninjaRepository;
+    }
+
+
+
+    public NinjaModel colocarNinjaEmMissao(Long idNinja, Long idMissao){
+        //vai procurar o ninja se achar vai retornar ele, se não vai retornar null
+        //o mesmo com missoes
+       NinjaModel ninja = ninjaRepository.findById(idNinja).orElse(null);
+       MissoesModel missoes = missoesRepository.findById(idMissao).orElse(null);
+
+       if(ninja != null && missoes != null ){
+           ninja.setMissoesModel(missoes);
+
+           return ninjaRepository.save(ninja);
+       }
+
+       return null;
     }
 
     public MissoesModel CadastrarMissoes(MissoesDTO missoesDTO){

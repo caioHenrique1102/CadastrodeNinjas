@@ -23,6 +23,9 @@ public class MissoesModel {
     private String dificuldade;
 
     //@OneToMany -> Uma missão pode um ou muitos ninjas associadas a ela
+    //mappedBy = "missao" é para evitar que o sistema crie tabelas extras
+    //a responsabilidade de guardar a conexão (o missao_id)
+    // já é do Ninja. Eu só quero ver a lista aqui".
     @OneToMany(mappedBy = "missoesModel")
     private List<NinjaModel> NinjaModel;
 
