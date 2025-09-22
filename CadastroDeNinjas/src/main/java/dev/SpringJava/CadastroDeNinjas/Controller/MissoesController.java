@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/missoes")
 public class MissoesController {
@@ -19,10 +19,6 @@ public class MissoesController {
     public MissoesController(MissoesService missoesService){
         this.missoesService = missoesService;
     }
-
-
-
-
 
     @PostMapping("/cadastro")
     public ResponseEntity<MissoesModel> cadastroMissoes(@RequestBody MissoesDTO missoesDTO){

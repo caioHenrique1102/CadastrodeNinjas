@@ -30,8 +30,8 @@ public class NinjaModel {
     private int idade;
 
     //@ManyToOne -> Muitos ninjas podem ter apenas uma missão
-    @ManyToOne
-    @JoinColumn(name = "missoes_id") //Chave estrangeira
+    @ManyToOne()
+    @JoinColumn(name = "missoes_nome") //Chave estrangeira
     private MissoesModel missoesModel;
 
 }

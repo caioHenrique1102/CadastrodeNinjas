@@ -2,7 +2,6 @@ package dev.SpringJava.CadastroDeNinjas.Service;
 import dev.SpringJava.CadastroDeNinjas.DTO.NinjaDTO;
 import dev.SpringJava.CadastroDeNinjas.Model.Entity.NinjaModel;
 import dev.SpringJava.CadastroDeNinjas.Model.Repository.NinjaRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -15,12 +14,8 @@ public class NinjaService {
         this.ninjaRepository = ninjaRepository;
     }
 
-     public List<NinjaModel> ListarNinja(){
-        return ninjaRepository.findAll();
-     }
-
      public Optional <NinjaModel> BuscarporNinja(Long id){
-        if(BuscarporNinja(id).isPresent()){
+        if(ninjaRepository.existsById(id)){
             return ninjaRepository.findById(id);
         }else {
             return Optional.empty();
@@ -39,28 +34,23 @@ public class NinjaService {
         ninjaRepository.deleteById(id);
      }
 
-
      //Optional é como uma caixa. Em vez do método te entregar o item diretamente
      //ele te entrega uma caixa. Essa caixa pode:
      //-Conter o item que você pediu.
      //-Estar vazia.
-     public Optional<NinjaModel> Alterar(NinjaDTO ninjaAlterado, Long id){
-        // linha para verficar se o ninja existe na caixa pelo ID
-        Optional<NinjaModel> NinjaExiste = ninjaRepository.findById(id);
-        //se o ninja existe na caixa optional ele vai atualizar as informações
-        if(NinjaExiste.isPresent()){
+     public NinjaModel Alterar(NinjaDTO ninjaAlterado, Long id){
 
-            NinjaModel ninja = NinjaExiste.get();
-
-            ninja.setNome(ninjaAlterado.nome());
-            ninja.setEmail(ninjaAlterado.email());
-            ninja.setIdade(ninjaAlterado.idade());
+           NinjaModel ninjaExiste = ninjaRepository.findById(id)
+                   .orElseThrow(() -> new RuntimeException("Error o ninja de id " + id + " não foi encontrado"));
+            ninjaExiste.setNome(ninjaAlterado.nome());
+            ninjaExiste.setEmail(ninjaAlterado.email());
+            ninjaExiste.setIdade(ninjaAlterado.idade());
 
             //salva as alterações do ninja no banco de dados
-            return Optional.of(ninjaRepository.save(ninja));
-
-        }else {
-            return Optional.empty();
+            return ninjaRepository.save(ninjaExiste);
         }
+     public List<NinjaModel> ListarNinja(){
+        return ninjaRepository.findAll();
      }
+
 }

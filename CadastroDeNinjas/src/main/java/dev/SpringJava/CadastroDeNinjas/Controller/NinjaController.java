@@ -44,16 +44,9 @@ public class NinjaController {
     public void Deletar(@PathVariable Long id){
         ninjaService.Deletar(id);
     }
-
-    @PatchMapping("/altera/{id}")
+    @PatchMapping("/alterar/{id}")
     public ResponseEntity<NinjaModel> alterarNinja(@PathVariable Long id, @RequestBody NinjaDTO ninja){
-        Optional <NinjaModel> optional = ninjaService.Alterar( ninja, id);
-
-        return optional
-                // ele pega o optinal e transforma em ResponseEntity
-                .map(ninjaAlterado -> ResponseEntity.ok(ninjaAlterado))
-                //caso esteja vazio, ele retornar um badRequest
-                .orElseGet(() -> ResponseEntity.badRequest().build());
+       return ResponseEntity.ok(ninjaService.Alterar(ninja, id));
     }
 
     @GetMapping("/listar")

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,12 +28,12 @@ public class MissoesModel {
     //a responsabilidade de guardar a conexão (o missao_id)
     // já é do Ninja. Eu só quero ver a lista aqui".
     @OneToMany(mappedBy = "missoesModel")
-    private List<NinjaModel> NinjaModel;
-
+    private List<NinjaModel> ninjaModel;
     public MissoesModel(MissoesDTO missoesDTO) {
         Id = missoesDTO.id();
         this.nome = missoesDTO.nome();
         this.dificuldade = missoesDTO.dificuldade();
+        this.ninjaModel = missoesDTO.listNinjas();
     }
 
 
