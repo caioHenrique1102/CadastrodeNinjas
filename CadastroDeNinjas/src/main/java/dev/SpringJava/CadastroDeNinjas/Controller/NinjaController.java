@@ -44,7 +44,8 @@ public class NinjaController {
     public void Deletar(@PathVariable Long id){
         ninjaService.Deletar(id);
     }
-    @PatchMapping("/alterar/{id}")
+
+    @PutMapping("/alterar/{id}")
     public ResponseEntity<NinjaModel> alterarNinja(@PathVariable Long id, @RequestBody NinjaDTO ninja){
        return ResponseEntity.ok(ninjaService.Alterar(ninja, id));
     }

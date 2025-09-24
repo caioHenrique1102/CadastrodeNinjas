@@ -4,12 +4,11 @@ import dev.SpringJava.CadastroDeNinjas.DTO.MissoesDTO;
 import dev.SpringJava.CadastroDeNinjas.Model.Entity.MissoesModel;
 import dev.SpringJava.CadastroDeNinjas.Model.Entity.NinjaModel;
 import dev.SpringJava.CadastroDeNinjas.Service.MissoesService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/missoes")
@@ -31,16 +30,12 @@ public class MissoesController {
 
     @GetMapping("/buscar/{id}")
     public ResponseEntity<MissoesModel> buscarMissoes(@PathVariable Long id){
-        Optional<MissoesModel> optional = missoesService.BuscarMissao(id);
-
-        return optional
-                .map(missaoEncontrada -> ResponseEntity.ok(missaoEncontrada))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(missoesService.BuscarMissao(id));
     }
 
-    @GetMapping("/listar")
-    public List<MissoesModel> listarMissoes(){
-        return missoesService.ListaMissoes();
+    @GetMapping("/listar/{id}")
+    public List<NinjaModel> listarNinjas(@PathVariable Long id){
+        return missoesService.ListadeNinjas(id);
     }
 
     @DeleteMapping("/deletar/{id}")
@@ -48,7 +43,7 @@ public class MissoesController {
         missoesService.Deletar(id);
     }
 
-    @PatchMapping("/{idNinja}/ninja/{idMissao}")
+    @PutMapping("/{idNinja}/{idMissao}")
     public ResponseEntity<NinjaModel> ninjaParaMissao(@PathVariable Long idNinja, @PathVariable Long idMissao){
 
         NinjaModel ninja = missoesService.colocarNinjaEmMissao(idNinja, idMissao);

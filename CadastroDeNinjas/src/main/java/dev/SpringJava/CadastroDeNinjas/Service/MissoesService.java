@@ -6,8 +6,10 @@ import dev.SpringJava.CadastroDeNinjas.Model.Repository.MissoesRepository;
 import dev.SpringJava.CadastroDeNinjas.Model.Repository.NinjaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
+
 @Service
 public class MissoesService {
    private final MissoesRepository missoesRepository;
@@ -43,12 +45,19 @@ public class MissoesService {
        return missoesRepository.save(missoesModel);
     }
 
-    public Optional<MissoesModel> BuscarMissao(Long id){
-        return missoesRepository.findById(id);
+    public MissoesModel BuscarMissao(Long id){
+
+        return missoesRepository.findById(id).orElseThrow(() -> new RuntimeException("Missão não encontrada"));
     }
 
-    public List<MissoesModel> ListaMissoes(){
-        return missoesRepository.findAll();
+    public List<NinjaModel> ListadeNinjas(Long id){
+        MissoesModel buscarMissao =  BuscarMissao(id);
+        if(buscarMissao != null){
+            return buscarMissao.getNinjaModel();
+        }
+          //retorna uma lista vazia
+        return Collections.emptyList();
+
     }
 
     public void Deletar(Long id){

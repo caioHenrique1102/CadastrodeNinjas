@@ -1,5 +1,6 @@
 package dev.SpringJava.CadastroDeNinjas.Model.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.SpringJava.CadastroDeNinjas.DTO.MissoesDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,12 +29,12 @@ public class MissoesModel {
     //a responsabilidade de guardar a conexão (o missao_id)
     // já é do Ninja. Eu só quero ver a lista aqui".
     @OneToMany(mappedBy = "missoesModel")
+    @JsonManagedReference
     private List<NinjaModel> ninjaModel;
     public MissoesModel(MissoesDTO missoesDTO) {
         Id = missoesDTO.id();
         this.nome = missoesDTO.nome();
         this.dificuldade = missoesDTO.dificuldade();
-        this.ninjaModel = missoesDTO.listNinjas();
     }
 
 
